@@ -28,6 +28,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().traerContactos();
       },
 
+      crearContacto: async (dataToSend) => {
+        const response = await fetch(
+          "https://playground.4geeks.com/contact/agendas/Edo/contacts",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dataToSend),
+          }
+        );
+      },
+
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
