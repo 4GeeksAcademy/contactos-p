@@ -7,8 +7,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           phone: "",
           email: "",
           address: "",
+          id: "",
         },
       ],
+      contact: {},
     },
 
     actions: {
@@ -37,6 +39,27 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(dataToSend),
           }
         );
+      },
+
+      editarContacto: async (dataToSend, id) => {
+        const response = await fetch(
+          "https://playground.4geeks.com/contact/agendas/Edo/contacts/" + id,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dataToSend),
+          }
+        );
+        if (response.ok) {
+          alert("Contacto actualizado correctamente");
+          getActions().traerContactos();
+        } else {
+          alert("Error al actualizar el contacto");
+        }
+      },
+
+      saveContact: (contact) => {
+        setStore({ contact: contact });
       },
 
       // Use getActions to call a function within a fuction
